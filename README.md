@@ -21,9 +21,15 @@ cd ../berlekamp_decode_simulation
 python3.6 Berlekamp_decode_simulation.py
 ```
 
-成功运行会得到下面曲线
+成功运行会得到下面曲线:
 
 ![性能曲线](./berlekamp_decode_simulation/RS255.svg)
+
+
+## 目前存在的问题
+
+- 高信噪比的情况下仿真点数不足，导致结果可能不够精确
+- 有限域及其上的多项式的运算函数没有经过优化，因此运行速度较慢
 
 ## 未来的改进
 
