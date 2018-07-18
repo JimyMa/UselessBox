@@ -12,10 +12,8 @@
 #     - RS ( 255, 223, 33 )
 #     - Raw BPSK
 # - $E_b / N_0$
-#     - RS ( 255, 239, 17 ) : 4.0 ~ 7.5 dB
-#     - RS ( 255, 223, 33 ) : 4.0 ~ 7.0 dB 
-# - 仿真次数
-#     - 初始为 1e5 个块，以后每增加 1 dB 增加 10 倍。
+#     - RS ( 255, 239, 17 ) : 4.0 ~ 7.4 dB
+#     - RS ( 255, 223, 33 ) : 4.0 ~ 6.6 dB 
 
 # In[1]:
 
@@ -32,33 +30,6 @@ def EbN02Amp(EbN0db, N0, num_n, num_k):
     EbN0 = 10 ** (EbN0db / 10.0)
     Eb = EbN0 * N0
     return np.sqrt(2 * Eb / num_n * num_k)
-
-
-# In[131]:
-
-
-import scipy.io as sio
-sio.savemat('RS_255_239_17.mat', {'dB': db_255_239_17,'BLER': SER_255_239_17,'SER': SER_255_239_17})
-sio.savemat('RS_255_223_33.mat', {'dB': db_255_223_33,'BLER': SER_255_223_33,'SER': SER_255_223_33})
-
-
-# In[132]:
-
-
-a = sio.loadmat("RS_255_239_17.mat")
-b = sio.loadmat("RS_255_223_33.mat")
-
-
-# In[130]:
-
-
-a
-
-
-# In[133]:
-
-
-b
 
 
 # 为了保证 $Eb/N0$ 换算成星座映射的幅值是正确的，首先对BPSK的误码率进行仿真分析。
@@ -93,11 +64,11 @@ plt.show()
 
 # 之后对 RS(255, 255, 239, 17) 的误符号率和误块率进行统计。
 
-# In[89]:
+# In[47]:
 
 
 db_255_239_17 = np.arange(4.4, 7.6, 0.2)
-seq_num_255_239_17 = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 50000, 100000, 800000]
+seq_num_255_239_17 = [10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 50000, 200000, 800000]
 amp = EbN02Amp(db_255_239_17, N0, 255, 239)
 SER_255_239_17 = np.zeros(db_255_239_17.shape)
 BLER_255_239_17 = np.zeros(db_255_239_17.shape)
@@ -129,13 +100,13 @@ for index, value in enumerate(amp):
     SER_255_239_17[index] = se_num / symbol_num
     BLER_255_239_17[index] = ble_num / block_num
     print("SER: ", SER_255_239_17[index])
-    print("BLER: ", BLER_255_239_17[index])
+    print("BLER: ", BLER_255_239_17[index])downloading
     print()
 
 
 # 得到的仿真曲线如下：
 
-# In[122]:
+# In[35]:
 
 
 plt.semilogy(db_255_239_17,
@@ -159,11 +130,11 @@ plt.show()
 
 # 之后对 RS(255, 223, 33) 的误符号率和误块率进行统计。
 
-# In[93]:
+# In[46]:
 
 
 db_255_223_33 = np.arange(4.4, 6.8, 0.2)
-seq_num_255_223_33 = [20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000, 200000, 800000]
+seq_num_255_223_33 = [20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000, 20000, 50000, 200000, 800000]
 amp = EbN02Amp(db_255_223_33, N0, 255, 223)
 SER_255_223_33 = np.zeros(db_255_223_33.shape)
 BLER_255_223_33 = np.zeros(db_255_223_33.shape)
@@ -194,7 +165,7 @@ for index, value in enumerate(amp):
         if block_se_num != 0 and rec_error_num <= 16:
             print("error")
     SER_255_223_33[index] = se_num / symbol_num
-    BLER_255_223_33[index] = ble_num / block_num
+    BLER_255_223_33[index] = ble_aaa = a['dB']num / block_num
     print("SER: ", SER_255_223_33[index])
     print("BLER: ", BLER_255_223_33[index])
     print()
@@ -202,7 +173,7 @@ for index, value in enumerate(amp):
 
 # 得到的仿真曲线如下：
 
-# In[121]:
+# In[8]:
 
 
 plt.semilogy(db_255_223_33,
@@ -215,7 +186,7 @@ plt.semilogy(db_255_223_33,
                     BLER_255_223_33,
                     marker="s",
                     color="r",
-                    markersize=4,
+                    markersize=4,aaa = a['dB']
                     lw=1)
 plt.semilogy(sim_psk_db, ber_psk, lw=1)
 plt.grid(True, which="both", color='0.9', ls="--")
@@ -224,7 +195,7 @@ plt.ylim(1e-7, 1)
 plt.show() 
 
 
-# In[120]:
+# In[36]:
 
 
 plt.figure(figsize = (5.8, 4))
@@ -267,3 +238,67 @@ plt.grid(True, which="both", color='0.9', ls="--")
 plt.xlim(3, 10.0)
 plt.ylim(1e-7, 1)
 plt.show() 
+
+
+# In[37]:
+
+
+import scipy.io as sio
+sio.savemat('RS_255_239_17.mat', {'dB': db_255_239_17,'BLER': BLER_255_239_17,'SER': SER_255_239_17})
+sio.savemat('RS_255_223_33.mat', {'dB': db_255_223_33,'BLER': BLER_255_223_33,'SER': SER_255_223_33})
+
+
+# In[38]:
+
+
+a = sio.loadmat("RS_255_239_17.mat")
+b = sio.loadmat("RS_255_223_33.mat")
+
+
+# In[43]:
+
+
+fig = plt.figure(figsize = (5.8, 4))
+f1, = plt.semilogy(a['dB'][0, :],
+                            a['SER'][0, :],
+                            marker="o",
+                            color="orange",
+                            markersize=4,
+                            lw=1)
+f2, = plt.semilogy(a['dB'][0, :],
+                            a['BLER'][0, :],
+                            marker="s",
+                            color="orange",
+                            markersize=4,
+                            lw=1)
+f3, = plt.semilogy(b['dB'][0, :],
+                            b['SER'][0, :],
+                            marker="o",
+                            color="violet",
+                            markersize=4,
+                            lw=1, 
+                            label="RS(255, 223, 33) SER")
+f4, = plt.semilogy(b['dB'][0, :],
+                            b['BLER'][0, :],
+                            marker="s",
+                            color="violet",
+                            markersize=4,
+                            lw=1)
+f5, = plt.semilogy(sim_psk_db, ber_psk, lw=1)
+plt.legend(handles= [f1, f2, f3, f4, f5], 
+                 labels = [
+                     "RS(255, 239, 17) SER",
+                     "RS(255, 239, 17) BLER",
+                     "RS(255, 223, 33) SER",
+                     "RS(255, 223, 33) BLER", 
+                     "Raw BPSK"],
+                 loc='best',
+                 prop={'size': 8.5})
+plt.grid(True, which="both", color='0.9', ls="--")
+plt.xlim(3, 10.0)
+plt.ylim(1e-7, 1)
+fig.savefig('RS255.pdf')
+fig.savefig('RS255.png')
+fig.savefig('RS255.svg')
+plt.show() 
+
