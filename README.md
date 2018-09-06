@@ -1,5 +1,11 @@
 # RS255_Berlekamp_Decoder
 
+## 新的改动
+
+- 加入了 欧几里得译码算法的 Python 和 C++ 接口，函数名为 euclidean\_decoder，参数和 berlekamp\_decoder 的参数保持一致
+- 未经过随机化测试，不保证正确性和 bugfree
+- Berlekamp 算法和 Euclidean 算法的原理将会在后续介绍
+
 ## 用到的软件清单
 - Ubuntu 16.04
 - C/C++
