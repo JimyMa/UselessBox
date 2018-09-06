@@ -3,6 +3,7 @@
 %{
     #define SWIG_FILE_WITH_INIT
     #include "Berlekamp.h"
+    #include "Euclidean.hpp"
     #include <zconf.h>
 %}
 %include "numpy.i"
@@ -16,4 +17,9 @@
     void berlekamp_decoder(unsigned int t, u_int16_t before[255], u_int16_t after[255]) {
         BerlekampDecoder(t, before, after);
     }
+%}
+%inline %{
+void euclidean_decoder(unsigned int t, u_int16_t before[255], u_int16_t after[255]) {
+    EuclideanDecoder(t, before, after);
+}
 %}
