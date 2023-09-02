@@ -1,13 +1,16 @@
 # RS255_Berlekamp_Decoder
 
-RS 是一种基于代数的纠错码 (RS is a kind of Error Correcting Code(ECC) based on algebra)：
+RS (Reed-Solomon) 编码是一种基于代数的纠错码 (RS (Reed-Solomon) code is a kind of Error Correcting Code(ECC) based on algebra)，其广泛应用于卫星通信，存储等领域。
 
+它离我们的生活并不远，我们喜闻乐见的二维码，就是通过 RS 编解码实现纠错的（用手挡住一部分二维码，或者在光线很暗的环境下，依然可以正确的扫描其所包含的信息）。其也是一种星际航行的信道编码标准：
+
+下面的图就是一个纠错的过程：
 ![useless_box](imgs/../docs/imgs/useless_box.gif)
+图中虽然人为地（信道噪声）改变了盒子的状态（发送信号），但是机械臂依然（解码器）有能力将状态还原。
 
-```
-source -> send -> noise -> receive -> decode
-```
+[Berlekamp 算法](https://jimyma.github.io/2018/07/09/Berlekamp_algorithm/) 是一种纠错算法 (Berlekamp Algorithm is a method to correcting error.)
 
+一个解码的过程的例子：
 ``` 
 source code: [0, 0, 0, 0, 0, 0, 0]
 +
@@ -20,8 +23,6 @@ decode
 v
 after decode: [0, 0, 0, 0, 0, 0, 0]
 ```
-
-[Berlekamp 算法](https://jimyma.github.io/2018/07/09/Berlekamp_algorithm/) 是一种纠错算法 (Berlekamp Algorithm is a method to correcting error.)
 
 ## 安装 (Install)
 ``` shell
@@ -38,6 +39,6 @@ python Berlekamp_decode_simulation.py
 # step-by-step
 jupyter-notebook Berlekamp_decode_simulation.ipynb
 ```
-程序巡行成功将输出如下曲线 (Outputs when the program is done):
+程序运行成功将输出如下曲线 (Outputs when the program is done):
 ![性能曲线](imgs/../docs/imgs/RS255.svg)
 
