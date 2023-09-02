@@ -1,8 +1,27 @@
 # RS255_Berlekamp_Decoder
 
-RS 是一种纠错码 (RS is a kind of Error Correcting Code(ECC))：
+RS 是一种基于代数的纠错码 (RS is a kind of Error Correcting Code(ECC) based on algebra)：
 
 ![useless_box](imgs/../docs/imgs/useless_box.gif)
+
+```
+source -> send -> noise -> receive -> decode
+```
+
+``` 
+source code: [0, 0, 0, 0, 0, 0, 0]
++
+noise: [0.1, 0.2, 0.05, 0.6, 0.1, 0.05, 0.3]
+||
+judgement: [0, 0, 0, 1, 0, 0, 0]
+|
+decode
+|
+v
+after decode: [0, 0, 0, 0, 0, 0, 0]
+```
+
+[Berlekamp 算法](https://jimyma.github.io/2018/07/09/Berlekamp_algorithm/) 是一种纠错算法 (Berlekamp Algorithm is a method to correcting error.)
 
 ## 安装 (Install)
 ``` shell
