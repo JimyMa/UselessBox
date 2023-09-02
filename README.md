@@ -1,6 +1,7 @@
 # RS255_Berlekamp_Decoder
 
 RS 是一种纠错码 (RS is a kind of Error Correcting Code(ECC))：
+
 ![useless_box](imgs/../docs/imgs/useless_box.gif)
 
 ## 安装 (Install)
