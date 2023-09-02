@@ -8,7 +8,7 @@ RS (Reed-Solomon) 编码是一种基于代数的纠错码 (RS (Reed-Solomon) cod
 ![useless_box](imgs/../docs/imgs/useless_box.gif)
 图中虽然人为地（信道噪声）改变了盒子的状态（发送信号），但是机械臂依然（解码器）有能力将状态还原。
 
-[Berlekamp 算法](https://jimyma.github.io/2018/07/09/Berlekamp_algorithm/) 是一种纠错算法 (Berlekamp Algorithm is a method to correcting error.)
+[Berlekamp 算法](https://jimyma.github.io/2018/07/09/Berlekamp_algorithm/) 是一种对 RS 编码的纠错算法 (Berlekamp Algorithm is a method to correcting error for RS code.)
 
 一个解码的过程的例子：
 ``` 
