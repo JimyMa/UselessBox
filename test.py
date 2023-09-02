@@ -1,12 +1,15 @@
-import RS255
+from rs_decoder_py import Berlekamp_Decoder
 import numpy as np 
-before = np.zeros(255, dtype=np.uint16)
-after = np.zeros(255, dtype=np.uint16)
+before = np.zeros(255, dtype=np.int32)
+
 before[1] = 12
 before[248] = 235
-after[1] = 12
+before[6] = 9
+before[30] = 12
+before[45] = 44
 t = 16
-RS255.berlekamp_decoder(t, before, after)
+decoder = Berlekamp_Decoder(t)
+after = decoder.Decode(before)
 
 print("before decode: ")
 print(before)
