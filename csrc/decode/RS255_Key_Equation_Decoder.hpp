@@ -4,7 +4,10 @@
 
 #ifndef RS255_BERLEKAMP_DECODER_RS255_DECODER_H
 #define RS255_BERLEKAMP_DECODER_RS255_DECODER_H
-# include "GF256_poly.h"
+
+# include <vector>
+
+# include "csrc/GF256/GF256_poly.h"
 
 class RS255_Key_Equation_Decoder {
 public:
@@ -22,6 +25,16 @@ public:
     max_correct = t;
   }
 
+  RS255_Key_Equation_Decoder(int t, std::vector<int> before) {
+    u_int16_t before_array[255];
+    for (int i = 0; i < 255; i++) {
+      before_array[i] = before[i];
+    }
+    before_poly = GF256_poly(before_array);
+    after_poly = before_poly;
+    max_correct = t;
+  }
+
   void GetCheckSum();
 
   virtual void CheinSearch();
@@ -29,8 +42,9 @@ public:
   virtual void GetSigmaOmega();
 
   void Decode(u_int16_t*);
+  void Decode(std::vector<int>&);
 
-  int max_correct;
+  size_t max_correct;
   GF256_poly before_poly;
   GF256_poly after_poly;
   GF256_poly check_sum;

@@ -2,7 +2,7 @@
 // Created by zoo2 on 18-9-8.
 //
 
-#include "RS255_Key_Equation_Decoder.hpp"
+#include "csrc/decode/RS255_Key_Equation_Decoder.hpp"
 
 void RS255_Key_Equation_Decoder::GetCheckSum() {
   for(unsigned int i = 1; i <= 2 * max_correct; i++)
@@ -28,3 +28,14 @@ void RS255_Key_Equation_Decoder::Decode(u_int16_t after[]) {
     after[i] = after_poly.get_coef(i).get_vector();
   }
 }
+
+void RS255_Key_Equation_Decoder::Decode(std::vector<int>& after) {
+  GetCheckSum();
+  GetSigmaOmega();
+  CheinSearch();
+  for(int i = 0; i < 255; i++)
+  {
+    after[i] = after_poly.get_coef(i).get_vector();
+  }
+}
+

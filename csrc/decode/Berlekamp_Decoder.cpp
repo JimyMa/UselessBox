@@ -2,7 +2,7 @@
 // Created by zoo2 on 18-7-14.
 //
 
-#include "Berlekamp_Decoder.hpp"
+#include "csrc/decode/Berlekamp_Decoder.hpp"
 
 void Berlekamp_Decoder::GetSigmaOmega() {
   GF256_poly sigma(1);

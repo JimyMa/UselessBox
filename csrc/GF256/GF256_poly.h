@@ -66,6 +66,8 @@ public:
   //GF256 operator[](int i) const;
   GF256 get_coef(int i) const;
 
+  size_t get_degree() const;
+
   bool operator==(GF256_poly a) const;
 
   bool operator==(GF256 gf256) const;
@@ -79,18 +81,25 @@ public:
   bool operator !=(GF256 gf256) const;
 
   GF256_poly operator+(const GF256_poly & a) const;
-
   GF256_poly operator+(const GF256 & gf256) const;
-
   GF256_poly operator+(const u_int16_t num) const;
 
+  GF256_poly operator-(const GF256_poly & a) const;
+  GF256_poly operator-(const GF256 & gf256) const;
+  GF256_poly operator-(const u_int16_t num) const;
+
   void operator+=(const GF256_poly &a);
+  void operator-=(const GF256_poly &a);
 
   GF256_poly operator*(GF256 scale);
 
   GF256_poly operator/(GF256 scale) const;
 
   GF256_poly operator*(const GF256_poly & a) const;
+  
+  GF256_poly operator/(const GF256_poly & a) const;
+
+  GF256_poly operator%(const GF256_poly & a) const;
 
 private:
   GF256 coef[255];

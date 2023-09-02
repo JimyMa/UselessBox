@@ -7,13 +7,17 @@
 
 #include <zconf.h>
 #include <vector>
-#include "GF256_poly.h"
-#include "RS255_Key_Equation_Decoder.hpp"
+#include "csrc/GF256/GF256_poly.h"
+#include "csrc/decode/RS255_Key_Equation_Decoder.hpp"
 
 class Berlekamp_Decoder : public RS255_Key_Equation_Decoder
 {
 public:
   Berlekamp_Decoder(int t, u_int16_t before[255]) : RS255_Key_Equation_Decoder(t, before)
+  {
+
+  }
+  Berlekamp_Decoder(int t, vector<int> before) : RS255_Key_Equation_Decoder(t, before)
   {
 
   }

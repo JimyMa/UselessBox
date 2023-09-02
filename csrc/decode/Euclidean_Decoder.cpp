@@ -2,7 +2,7 @@
 // Created by zoo2 on 18-9-6.
 //
 
-#include "Euclidean_Decoder.hpp"
+#include "csrc/decode/Euclidean_Decoder.hpp"
 
 void Euclidean_Decoder::GetSigmaOmega() {
   GF256_poly Sigma_0;
