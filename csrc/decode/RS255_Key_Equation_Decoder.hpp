@@ -5,52 +5,27 @@
 #ifndef RS255_BERLEKAMP_DECODER_RS255_DECODER_H
 #define RS255_BERLEKAMP_DECODER_RS255_DECODER_H
 
-# include <vector>
+#include <vector>
 
-# include "csrc/GF256/GF256_poly.h"
+#include "csrc/GF256/GF256_poly.h"
 
 class RS255_Key_Equation_Decoder {
-public:
+ public:
+  size_t get_max_correct() { return max_correct; };
 
-  RS255_Key_Equation_Decoder()
-  {
-    max_correct = 0;
-    cout << "need to tell me max_correct and before code" << endl;
-  }
+  RS255_Key_Equation_Decoder(int t) { max_correct = t; }
 
-  RS255_Key_Equation_Decoder(int t, u_int16_t before[255])
-  {
-    before_poly = GF256_poly(before);
-    after_poly = before_poly;
-    max_correct = t;
-  }
+  GF256_poly GetCheckSum(GF256_poly& source);
 
-  RS255_Key_Equation_Decoder(int t, std::vector<int> before) {
-    u_int16_t before_array[255];
-    for (int i = 0; i < 255; i++) {
-      before_array[i] = before[i];
-    }
-    before_poly = GF256_poly(before_array);
-    after_poly = before_poly;
-    max_correct = t;
-  }
+  virtual GF256_poly CheinSearch(GF256_poly& sigma, GF256_poly& omega);
 
-  void GetCheckSum();
+  virtual std::pair<GF256_poly, GF256_poly> GetSigmaOmega(
+      GF256_poly& check_sum);
 
-  virtual void CheinSearch();
+  std::vector<int32_t> Decode(std::vector<int32_t>);
 
-  virtual void GetSigmaOmega();
-
-  void Decode(u_int16_t*);
-  void Decode(std::vector<int>&);
-
+ private:
   size_t max_correct;
-  GF256_poly before_poly;
-  GF256_poly after_poly;
-  GF256_poly check_sum;
-  GF256_poly sigma_poly;
-  GF256_poly omega_poly;
 };
 
-
-#endif //RS255_BERLEKAMP_DECODER_RS255_DECODER_H
+#endif  // RS255_BERLEKAMP_DECODER_RS255_DECODER_H

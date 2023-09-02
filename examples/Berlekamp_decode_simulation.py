@@ -20,7 +20,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-import RS255
+from rs_decoder_py import Berlekamp_Decoder
 
 
 # In[2]:
@@ -87,7 +87,8 @@ for index, value in enumerate(amp):
             for j in range(8):
                 symbol += (1 << j if bit_seq[i * 8 + j] > 0 else 0)
             symbol_seq[i] = symbol
-        RS255.berlekamp_decoder(8, symbol_seq, rec_symbol_seq)
+        decoder = Berlekamp_Decoder(8)
+        rec_symbol_seq = decoder.Decode(symbol_seq)
         symbol_error_flag = rec_symbol_seq > 0
         block_se_num = np.sum(symbol_error_flag[0:239])
         se_num += block_se_num
@@ -100,7 +101,7 @@ for index, value in enumerate(amp):
     SER_255_239_17[index] = se_num / symbol_num
     BLER_255_239_17[index] = ble_num / block_num
     print("SER: ", SER_255_239_17[index])
-    print("BLER: ", BLER_255_239_17[index])downloading
+    print("BLER: ", BLER_255_239_17[index])
     print()
 
 
@@ -154,7 +155,7 @@ for index, value in enumerate(amp):
             for j in range(8):
                 symbol += (1 << j if bit_seq[i * 8 + j] > 0 else 0)
             symbol_seq[i] = symbol
-        RS255.berlekamp_decoder(16, symbol_seq, rec_symbol_seq)
+        decoder = Berlekamp_Decoder(16)
         symbol_error_flag = rec_symbol_seq > 0
         block_se_num = np.sum(symbol_error_flag[0:223])
         se_num += block_se_num
@@ -165,7 +166,7 @@ for index, value in enumerate(amp):
         if block_se_num != 0 and rec_error_num <= 16:
             print("error")
     SER_255_223_33[index] = se_num / symbol_num
-    BLER_255_223_33[index] = ble_aaa = a['dB']num / block_num
+    BLER_255_223_33[index] = ble_num / block_num
     print("SER: ", SER_255_223_33[index])
     print("BLER: ", BLER_255_223_33[index])
     print()
@@ -186,7 +187,7 @@ plt.semilogy(db_255_223_33,
                     BLER_255_223_33,
                     marker="s",
                     color="r",
-                    markersize=4,aaa = a['dB']
+                    markersize=4,
                     lw=1)
 plt.semilogy(sim_psk_db, ber_psk, lw=1)
 plt.grid(True, which="both", color='0.9', ls="--")
