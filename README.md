@@ -15,5 +15,5 @@ python3.6 Berlekamp_decode_simulation.py
 
 成功运行会得到下面曲线:
 
-![性能曲线](./berlekamp_decode_simulation/RS255.svg)
+![性能曲线](imgs/../docs/imgs/RS255.svg)
 
